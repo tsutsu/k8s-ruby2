@@ -1,4 +1,3 @@
-
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "k8s/ruby/version"
@@ -23,14 +22,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = '>= 2.4'
 
-  spec.add_runtime_dependency "excon", "~> 0.78"
   spec.add_runtime_dependency "dry-struct", "~> 1.3.0"
   spec.add_runtime_dependency "dry-types", "~> 1.4.0"
-  spec.add_runtime_dependency "recursive-open-struct", "~> 1.1.0"
+  spec.add_runtime_dependency "excon", "~> 0.78"
+  spec.add_runtime_dependency "recursive-open-struct", "~> 1.1.3"
+  spec.add_runtime_dependency "yaml-safe_load_stream2", "~> 0.1.1"
   spec.add_runtime_dependency 'hashdiff', '~> 1.0.1'
   spec.add_runtime_dependency 'jsonpath', '~> 1.1.0'
   spec.add_runtime_dependency 'yajl-ruby', '~> 1.4.1'
-  spec.add_runtime_dependency "yaml-safe_load_stream2", "~> 0.1.1"
 
   spec.add_development_dependency "bundler", ">= 1.17", "< 3.0"
   spec.add_development_dependency "rake", ">= 12.3.3"

@@ -39,17 +39,17 @@ RSpec.describe K8s::APIClient do
 
     before do
       stub_request(:get, 'localhost:8080/api/v1')
-      .to_return(
-        status: 200,
-        body: fixture('api/api-v1.json'),
-        headers: { 'Content-Type' => 'application/json' }
-      )
+        .to_return(
+          status: 200,
+          body: fixture('api/api-v1.json'),
+          headers: { 'Content-Type' => 'application/json' }
+        )
     end
 
     describe '#api_resources' do
       it "returns array of APIResource" do
         expect(subject.api_resources.first).to match K8s::API::MetaV1::APIResource
-        expect(subject.api_resources.map{|r| r.name}).to match(
+        expect(subject.api_resources.map{ |r| r.name}).to match(
           # curl http://localhost:8001/api/v1 | jq -r '.resources[].name'
           <<-EOM
             bindings
@@ -96,7 +96,7 @@ RSpec.describe K8s::APIClient do
 
     describe '#resource' do
       it "raises error for non-existing resource" do
-        expect{subject.resource('wtfs')}.to raise_error(K8s::Error::UndefinedResource, %r(Unknown resource wtfs for v1))
+        expect{subject.resource('wtfs')}.to raise_error(K8s::Error::UndefinedResource, /Unknown resource wtfs for v1/)
       end
 
       it "returns client for resource name" do
@@ -127,7 +127,7 @@ RSpec.describe K8s::APIClient do
         }
 
         it "raises error" do
-          expect{subject.client_for_resource(resource)}.to raise_error(K8s::Error::UndefinedResource,  %r(Unknown resource kind=Wtf for v1))
+          expect{subject.client_for_resource(resource)}.to raise_error(K8s::Error::UndefinedResource, /Unknown resource kind=Wtf for v1/)
         end
       end
     end
