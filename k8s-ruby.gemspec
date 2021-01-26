@@ -22,8 +22,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = '>= 2.4'
 
-  spec.add_runtime_dependency "dry-struct", "~> 1.3.0"
-  spec.add_runtime_dependency "dry-types", "~> 1.4.0"
+  spec.add_runtime_dependency "dry-struct", "~> 1.4.0"
+  spec.add_runtime_dependency "dry-types", "~> 1.5.0"
   spec.add_runtime_dependency "excon", "~> 0.78"
   spec.add_runtime_dependency "recursive-open-struct", "~> 1.1.3"
   spec.add_runtime_dependency "yaml-safe_load_stream2", "~> 0.1.1"
@@ -35,6 +35,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", ">= 12.3.3"
   spec.add_development_dependency "rspec", "~> 3.10"
   spec.add_development_dependency "webmock", "~> 3.11.0"
-  spec.add_development_dependency "rubocop", "~> 1.7.0"
+  spec.add_development_dependency "rubocop", "~> 1.8.0"
   spec.add_development_dependency "byebug", "~> 11.1.3"
 end
