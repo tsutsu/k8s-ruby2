@@ -41,9 +41,9 @@ module K8s
 
     # @param hash [Hash]
     # @param options [Hash] see RecursiveOpenStruct#initialize
-    def initialize(hash, **options)
-      options_with_defaults = { recurse_over_arrays: true }.merge(options)
-      super(hash, **options_with_defaults)
+    def initialize(hash, options = {}, **kwargs)
+      options_with_defaults = { recurse_over_arrays: true }.merge(options).merge(kwargs)
+      super(hash, options_with_defaults)
     end
 
     # @param args [Array] see Hash#to_json
