@@ -73,9 +73,9 @@ module K8s
         logger.debug "Using config with .user.token=..."
 
         options[:auth_token] = token
-      elsif config.user.auth_provider && auth_provider = config.user.auth_provider.config
+      elsif config.user.auth_provider && auth_provider_config = config.user.auth_provider.config
         logger.debug "Using config with .user.auth-provider.name=#{config.user.auth_provider.name}"
-        options[:auth_token] = token_from_auth_provider(auth_provider)
+        options[:auth_token] = token_from_auth_provider_config(auth_provider_config)
       elsif exec_conf = config.user.exec
         logger.debug "Using config with .user.exec.command=#{exec_conf.command}"
         options[:auth_token] = token_from_exec(exec_conf)
@@ -91,15 +91,15 @@ module K8s
       new(server, **options, **overrides)
     end
 
-    # @param auth_provider [K8s::Config::UserAuthProvider]
+    # @param auth_provider_config [K8s::Config::UserAuthProvider]
     # @return [String]
-    def self.token_from_auth_provider(auth_provider)
-      return auth_provider['id-token'] if auth_provider['id-token']
+    def self.token_from_auth_provider(auth_provider_config)
+      return auth_provider_config['id-token'] if auth_provider_config['id-token']
 
-      auth_data = `#{auth_provider.config['cmd-path']} #{auth_provider.config['cmd-args']}`.strip
+      auth_data = `#{auth_provider_config['cmd-path']} #{auth_provider_config['cmd-args']}`.strip
 
-      if auth_provider.config['token-key']
-        json_path = JsonPath.new(auth_provider.config['token-key'][1...-1])
+      if auth_provider_config['token-key']
+        json_path = JsonPath.new(auth_provider_config['token-key'][1...-1])
         json_path.first(auth_data)
       else
         auth_data
