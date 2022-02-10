@@ -3,6 +3,6 @@
 module K8s
   class Ruby
     # Updated on releases using semver.
-    VERSION = "0.10.8"
+    VERSION = "2.0.13"
   end
 end
