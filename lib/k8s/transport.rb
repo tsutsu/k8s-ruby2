@@ -93,7 +93,7 @@ module K8s
 
     # @param auth_provider_config [K8s::Config::UserAuthProvider]
     # @return [String]
-    def self.token_from_auth_provider(auth_provider_config)
+    def self.token_from_auth_provider_config(auth_provider_config)
       return auth_provider_config['id-token'] if auth_provider_config['id-token']
 
       auth_data = `#{auth_provider_config['cmd-path']} #{auth_provider_config['cmd-args']}`.strip
